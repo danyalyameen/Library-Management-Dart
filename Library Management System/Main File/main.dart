@@ -10,17 +10,21 @@ late bool restartFromScrath;
 
 void startingScreen() {
   restartFromScrath = true;
-  TwoCredentialsMethod(
-      restart: restartFromScrath,
-      title: "-------------------- Welcome to Library --------------------",
-      option1: "Teacher",
-      option2: "Student",
-      case1: () {
-        restartFromScrath = false;
-        Teachers.startingScreen();
-      },
-      case2: () {
-        restartFromScrath = false;
-        Students();
-      });
+  while (restartFromScrath) {
+    TwoCredentialsMethod(
+        title: "-------------------- Welcome to Library --------------------",
+        option1: "Teacher",
+        option2: "Student",
+        case1: () {
+          restartFromScrath = false;
+          Teachers.startingScreen();
+        },
+        case2: () {
+          restartFromScrath = false;
+          Students();
+        },
+        defaultCase: () {
+          restartFromScrath = true;
+        });
+  }
 }

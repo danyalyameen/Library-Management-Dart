@@ -1,5 +1,6 @@
 import '../../Functions/Teachers/login_screen.dart';
 import '../../Functions/Universal Functions/credentials.dart';
+import '../../Main File/main.dart';
 
 class Teachers {
   static List<Map<String, dynamic>> teachersData = [
@@ -26,19 +27,22 @@ class Teachers {
   static var check;
   static startingScreen() {
     check = true;
-    TwoCredentialsMethod(
-        title: "--------------------- Teachers Portal ----------------------",
-        option1: "Login",
-        option2: "Exit",
-        restart: check,
-        case1: () {
-          check = false;
-          loginScreen();
-        },
-        case2: () {
-          check = false;
-        });
-
-    check = true;
+    while (check) {
+      TwoCredentialsMethod(
+          title: "--------------------- Teachers Portal ----------------------",
+          option1: "Login",
+          option2: "Exit",
+          case1: () {
+            check = false;
+            loginScreen();
+          },
+          case2: () {
+            check = false;
+            restartFromScrath = true;
+          },
+          defaultCase: () {
+            check = true;
+          });
+    }
   }
 }

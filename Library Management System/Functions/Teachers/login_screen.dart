@@ -19,50 +19,61 @@ loginScreen() {
           String enteredPassword = stdin.readLineSync()!;
           if (enteredPassword == data["Password"]) {
             correctPassword = true;
-            print(
-                "------------------------------------------------------------");
+            checkLogin = false;
             homeScreen();
           } else {
             var invalidPassword = true;
-            TwoCredentialsMethod(
-                restart: invalidPassword,
-                title: "Invalid Password. Please Select the Option: ",
-                option1: "Re-Enter Password",
-                option2: "Exit",
-                case1: () {
-                  invalidPassword = false;
-                  correctPassword = false;
-                  print(
-                      "------------------------------------------------------------");
-                },
-                case2: () {
-                  invalidPassword = false;
-                  correctPassword = true;
-                  checkLogin = false;
-                  restartFromScrath = true;
-                  Teachers.check = false;
-                });
+            while (invalidPassword) {
+              print(
+                  "------------------------------------------------------------");
+              TwoCredentialsMethod(
+                  title: "Invalid Password. Please Select the Option: ",
+                  option1: "Re-Enter Password",
+                  option2: "Exit",
+                  case1: () {
+                    invalidPassword = false;
+                    correctPassword = false;
+                    print(
+                        "------------------------------------------------------------");
+                  },
+                  case2: () {
+                    invalidPassword = false;
+                    correctPassword = true;
+                    checkLogin = false;
+                    restartFromScrath = true;
+                    Teachers.check = false;
+                  },
+                  defaultCase: () {
+                    invalidPassword = true;
+                  });
+            }
           }
         }
         break;
       } else {
         if (data == Teachers.teachersData.last) {
           var invalidID = true;
-          TwoCredentialsMethod(
-            restart: invalidID,
-            title: "Invalid Teacher ID. Please Select the Option: ",
-            option1: "Re-Enter Teacher ID",
-            option2: "Exit",
-            case1: () {
-              checkLogin = true;
-              invalidID = false;
-            },
-            case2: () {
-              checkLogin = false;
-              invalidID = false;
-              Teachers.check = false;
-            },
-          );
+          while (invalidID) {
+            print(
+                "------------------------------------------------------------");
+            TwoCredentialsMethod(
+                title: "Invalid Teacher ID. Please Select the Option: ",
+                option1: "Re-Enter Teacher ID",
+                option2: "Exit",
+                case1: () {
+                  checkLogin = true;
+                  invalidID = false;
+                },
+                case2: () {
+                  invalidID = false;
+                  checkLogin = false;
+                  Teachers.check = false;
+                  restartFromScrath = true;
+                },
+                defaultCase: () {
+                  invalidID = true;
+                });
+          }
         }
       }
     }
