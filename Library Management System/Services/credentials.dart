@@ -1,7 +1,5 @@
 import 'dart:io';
 
-bool restartCredential = true;
-
 TwoCredentialsMethod(
     {required String title,
     required String option1,

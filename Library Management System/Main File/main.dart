@@ -1,30 +1,29 @@
-import '../Features/Students/student_system.dart';
-import '../Features/Teachers/teacher_system.dart';
-import '../Functions/Universal Functions/credentials.dart';
+import '../Constants/restart_variables.dart';
+import '../View/Students/student_home_view.dart';
+import '../View/Teachers/teacher_home_view.dart';
+import '../Services/credentials.dart';
 
 void main() {
-  startingScreen();
+  HomeView();
 }
 
-late bool restartFromScrath;
-
-void startingScreen() {
-  restartFromScrath = true;
-  while (restartFromScrath) {
+void HomeView() {
+  RestartVariables.restartFromScrath = true;
+  while (RestartVariables.restartFromScrath) {
     TwoCredentialsMethod(
         title: "-------------------- Welcome to Library --------------------",
         option1: "Teacher",
         option2: "Student",
         case1: () {
-          restartFromScrath = false;
-          Teachers.startingScreen();
+          RestartVariables.restartFromScrath = false;
+          Teachers.startingScreenTeacher();
         },
         case2: () {
-          restartFromScrath = false;
+          RestartVariables.restartFromScrath = false;
           Students();
         },
         defaultCase: () {
-          restartFromScrath = true;
+          RestartVariables.restartFromScrath = true;
         });
   }
 }
