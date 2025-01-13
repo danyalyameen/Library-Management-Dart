@@ -1,6 +1,6 @@
-import '../../Constants/restart_variables.dart';
-import '../../Services/credentials.dart';
-import '../../View Models/Teachers/teacher_login_viewmodel.dart';
+import '../../../../Constants/restart_variables.dart';
+import '../../../../Services/credentials.dart';
+import 'teacher_login_view_model.dart';
 
 loginViewTeacher() {
   RestartVariables.loginCheckView = true;

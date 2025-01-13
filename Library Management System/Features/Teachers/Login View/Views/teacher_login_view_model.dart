@@ -1,9 +1,10 @@
 import 'dart:io';
 
-import '../../Constants/lists_databases.dart';
-import '../../Constants/restart_variables.dart';
-import '../../Services/credentials.dart';
-import '../../View/Teachers/teacher_portal_view.dart';
+import '../../../../Constants/global_variables.dart';
+import '../../../../Constants/lists_databases.dart';
+import '../../../../Constants/restart_variables.dart';
+import '../../../../Services/credentials.dart';
+import '../../Home View/Views/teacher_home_view.dart';
 
 loginScreen() {
   RestartVariables.loginCheckViewModel = true;
@@ -13,6 +14,7 @@ loginScreen() {
     String teacherID = stdin.readLineSync()!;
     for (var data in Databases.teachersData) {
       if (teacherID == data["ID"]) {
+        GlobalVariables.teacherID = teacherID;
         var correctPassword = false;
         while (correctPassword == false) {
           stdout.write("Enter Your Password: ");
