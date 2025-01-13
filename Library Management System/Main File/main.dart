@@ -1,4 +1,5 @@
 import '../Constants/restart_variables.dart';
+import '../Features/Students/Login View/Views/student_login_view.dart';
 import '../Features/Teachers/Login View/Views/teacher_login_view.dart';
 import '../Services/credentials.dart';
 
@@ -19,6 +20,7 @@ void HomeView() {
         },
         case2: () {
           RestartVariables.restartFromScrath = false;
+          loginViewStudent();
         },
         defaultCase: () {
           RestartVariables.restartFromScrath = true;

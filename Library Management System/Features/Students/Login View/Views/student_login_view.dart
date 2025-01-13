@@ -2,7 +2,7 @@ import '../../../../Constants/restart_variables.dart';
 import '../../../../Services/credentials.dart';
 import 'student_login_view_model.dart';
 
-loginViewTeacher() {
+loginViewStudent() {
   RestartVariables.studentLoginCheckView = true;
   while (RestartVariables.studentLoginCheckView) {
     TwoCredentialsMethod(

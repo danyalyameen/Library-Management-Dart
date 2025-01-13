@@ -5,6 +5,10 @@ import '../../../../Constants/lists_databases.dart';
 import '../../../../Constants/restart_variables.dart';
 import '../../../../Services/credentials.dart';
 
+int teacherIndex = Databases.teachersData.indexWhere(
+  (element) => element["ID"] == GlobalVariables.teacherID,
+);
+
 portalViewModel({required String inputNum}) {
   switch (inputNum) {
     case "1":
@@ -61,12 +65,9 @@ account() {
 
 accountDetails() {
   print("--------------------------------------------------------------");
-  print(
-      "ID : ${Databases.teachersData[GlobalVariables.teacherIndex]["ID"]}");
-  print(
-      "Teacher Name: ${Databases.teachersData[GlobalVariables.teacherIndex]["Name"]}");
-  print(
-      "Password: ${Databases.teachersData[GlobalVariables.teacherIndex]["Password"]}");
+  print("ID : ${Databases.teachersData[teacherIndex]["ID"]}");
+  print("Teacher Name: ${Databases.teachersData[teacherIndex]["Name"]}");
+  print("Password: ${Databases.teachersData[teacherIndex]["Password"]}");
   print("--------------------------------------------------------------");
 }
 
@@ -81,10 +82,10 @@ editAccountDetails() {
     String inputNum = stdin.readLineSync()!;
     switch (inputNum) {
       case "1":
-        checkBorrowedBooks();
+        updateName();
         break;
       case "2":
-        borrowABook();
+        updatePassword();
         break;
       case "3":
         validNumber = false;
@@ -101,8 +102,7 @@ updateName() {
     String teacherName = stdin.readLineSync()!;
     if (teacherName.isNotEmpty) {
       nameIsEmpty = false;
-      Databases.teachersData[GlobalVariables.teacherIndex]["Name"] =
-          teacherName;
+      Databases.teachersData[teacherIndex]["Name"] = teacherName;
     } else {
       print("-----------------");
       print("Please Enter Name");
@@ -125,8 +125,7 @@ updatePassword() {
         passwordIsEmpty = true;
       } else {
         passwordIsEmpty = false;
-        Databases.teachersData[GlobalVariables.teacherIndex]["Password"] =
-            teacherPassword;
+        Databases.teachersData[teacherIndex]["Password"] = teacherPassword;
       }
     } else {
       print("-----------------");
@@ -190,7 +189,8 @@ registerStudent() {
                     print("--------------------------------------");
                     RestartVariables.checkStudentRegistrationPassword = true;
                   } else {
-                    Databases.studentsData.add(
+                    Databases.studentsData.insert(
+                      0,
                       {
                         "Roll No.": studentRollNo,
                         "Student Name": studentName,
@@ -383,13 +383,14 @@ borrowedBooks() {
 }
 
 checkBorrowedBooks() {
-  if (Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"].isEmpty) {
+  if (Databases.teachersData[teacherIndex]["Borrowed Books"].isEmpty) {
     print("-----------------");
     print("No Borrowed Books");
     print("-----------------");
     return;
   }
-  for (var borrowedBooks in Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"]) {
+  for (var borrowedBooks in Databases.teachersData[teacherIndex]
+      ["Borrowed Books"]) {
     print("---------------------------------");
     print("Book Name: ${borrowedBooks["title"]}");
     print("Author Name: ${borrowedBooks["author"]}");
@@ -408,14 +409,14 @@ borrowABook() {
       bool bookExist = Databases.books.any(
         (element) => element["title"] == bookName,
       );
-      bool bookAlreadyAddedInBorrowed = Databases.teachersData[GlobalVariables.teacherIndex]
+      bool bookAlreadyAddedInBorrowed = Databases.teachersData[teacherIndex]
               ["Borrowed Books"]
           .any((element) => element["title"] == bookName);
       int bookIndex = Databases.books.indexWhere(
         (element) => element["title"] == bookName,
       );
       if (bookExist && !bookAlreadyAddedInBorrowed) {
-        Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"].add(
+        Databases.teachersData[teacherIndex]["Borrowed Books"].add(
           Databases.books[bookIndex],
         );
         print("-------------------------");
@@ -466,7 +467,8 @@ returnedBooks() {
 }
 
 checkReturnedBooks() {
-  for (var returnedBooks in Databases.teachersData[GlobalVariables.teacherIndex]["Returned Books"]) {
+  for (var returnedBooks in Databases.teachersData[teacherIndex]
+      ["Returned Books"]) {
     print("---------------------------------");
     print("Book Name: ${returnedBooks["title"]}");
     print("Author Name: ${returnedBooks["author"]}");
@@ -483,18 +485,18 @@ returnABook() {
     if (bookName.isNotEmpty) {
       bookNameIsEmpty = false;
       bool bookExistInBorrowedBooks =
-          Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"].any(
+          Databases.teachersData[teacherIndex]["Borrowed Books"].any(
         (element) => element["title"] == bookName,
       );
       int bookIndex =
-          Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"].indexWhere(
+          Databases.teachersData[teacherIndex]["Borrowed Books"].indexWhere(
         (element) => element["title"] == bookName,
       );
       if (bookExistInBorrowedBooks) {
-        Databases.teachersData[GlobalVariables.teacherIndex]["Returned Books"].add(
-          Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"][bookIndex],
+        Databases.teachersData[teacherIndex]["Returned Books"].add(
+          Databases.teachersData[teacherIndex]["Borrowed Books"][bookIndex],
         );
-        Databases.teachersData[GlobalVariables.teacherIndex]["Borrowed Books"]
+        Databases.teachersData[teacherIndex]["Borrowed Books"]
             .removeAt(bookIndex);
         print("-------------------------");
         print("Return Book Successfully!");
