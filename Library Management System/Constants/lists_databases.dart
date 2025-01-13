@@ -4,7 +4,6 @@ class Databases {
       "Name": "Bilal Rehman",
       "ID": "210911",
       "Password": "!!@@##AA",
-      "Subject": "Computer Science",
       "Borrowed Books": [
         {
           "title": "1984",
@@ -24,7 +23,6 @@ class Databases {
       "Name": "Asif",
       "ID": "211192",
       "Password": "!!()()SS",
-      "Subject": "Geography",
       "Borrowed Books": [
         {
           "title": "The Hobbit",
@@ -44,7 +42,6 @@ class Databases {
       "Name": "Taber",
       "ID": "218956",
       "Password": "English",
-      "Subject": "Computer Science",
       "Borrowed Books": [
         {
           "title": "1984",
